@@ -900,6 +900,7 @@ def inputHandler(evt) {
                 translatable: evt.translatable,
                 type: evt.type,
                 value: evt.value,
+                value_custom: evt.value.toString().replace(" ", "_"),
                 unit: evt.unit,
             ]
 		])
@@ -1298,34 +1299,43 @@ def actionSecurityKeypad(device, attribute, value) {
 // codeposition required (NUMBER) - Code position number
 // pincode required (STRING) - Numeric PIN code
 // name optional (STRING) - Name for this lock code
-	switch (value) {
+	def (directive) = value.tokenize()
+	switch (directive) {
 		case "armAway":
 			device.armAway()
 			break
 		case "armHome":
 			device.armHome()
 			break
+		case "armNight":
+			device.armNight(null)
+			break
 		case "deleteCode":
-			device.deleteCode(value)
+			def (_, param) = value.tokenize()
+			device.deleteCode(param)
 			break
 		case "disarm":
-			device.disarm(value)
+			def (_, param) = value.tokenize()
+			device.disarm(param)
 			break
 		case "getCodes":
 			device.getCodes()
 			break
 		case "setCode":
-		    def (codeposition, pincode, name) = value.split(",")
+			def (_, codeposition, pincode, name) = value.split(",")
 			device.setCode(codeposition, pincode, name)
 			break
 		case "setCodeLength":
-			device.setCodeLength(value)
+			def (_, param) = value.tokenize()
+			device.setCodeLength(param)
 			break
 		case "setEntryDelay":
-			device.setEntryDelay(value)
+			def (_, param) = value.tokenize()
+			device.setEntryDelay(param)
 			break
 		case "setExitDelay":
-			device.setExitDelay(value)
+			def (_, param) = value.tokenize()
+			device.setExitDelay(param)
 			break
 	}
 }
