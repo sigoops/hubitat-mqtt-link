@@ -900,7 +900,6 @@ def inputHandler(evt) {
                 translatable: evt.translatable,
                 type: evt.type,
                 value: evt.value,
-                value_custom: evt.value.toString().replace(" ", "_"),
                 unit: evt.unit,
             ]
 		])
