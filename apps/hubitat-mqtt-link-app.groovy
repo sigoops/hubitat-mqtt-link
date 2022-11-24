@@ -405,6 +405,7 @@ def capabilitiesPage() {
 		name: "Notification",
 		capability: "capability.notification",
 		attributes: [
+			"notification"
 		],
 		action: "actionNotification"
 	],
